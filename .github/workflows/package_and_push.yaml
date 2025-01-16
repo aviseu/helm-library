@@ -27,7 +27,7 @@ jobs:
 
       - name: Set up K8S config
         run: |-
-          gcloud container clusters get-credentials alex-cloud-1 --region us-central1
+          gcloud container clusters get-credentials alex-cloud-1 --region us-central1-c
 
       - name: Helm login
         run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
