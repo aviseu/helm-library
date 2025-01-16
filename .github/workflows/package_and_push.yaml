@@ -17,6 +17,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+#      - name: Build
+#        run: helm dependency build example/
+
+#      - name: Test
+#        run: helm install example example/ -f example/values.yaml -f example/values.override.yaml -f example/secrets.override.yaml --dry-run --debug
+
       - id: auth
         name: Authenticate
         uses: google-github-actions/auth@v2
@@ -32,7 +38,7 @@ jobs:
       - name: Helm login
         run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
 
-      - name: Packagge helm library
+      - name: Package helm library
         run: helm package helm-library
 
       - name: Get current version
@@ -41,7 +47,7 @@ jobs:
       - name: Push helm library
         run: |-
           export HELM_EXPERIMENTAL_OCI=1
-          helm push helm-library-${{ env.CURRENT_VERSION }}.tgz oci://us-central1-docker.pkg.dev/alex-cloud-438416/helm-library
+          helm push helm-library-${{ env.CURRENT_VERSION }}.tgz oci://us-central1-docker.pkg.dev/alex-cloud-438416/helm-library --debug
 
       - name: Show pushed version
         run: echo ${{ env.CURRENT_VERSION }}
