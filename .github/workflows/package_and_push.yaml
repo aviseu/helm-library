@@ -1,0 +1,47 @@
+name: Package Helm Library Chart and Push to GCP's Artifact Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  package_and_push:
+    name: Package and Push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - id: auth
+        name: Authenticate
+        uses: google-github-actions/auth@v2
+        with:
+          project_id: 'alex-cloud-438416'
+          workload_identity_provider: 'projects/38127965315/locations/global/workloadIdentityPools/github-actions/providers/github'
+          service_account: 'github-agent@alex-cloud-438416.iam.gserviceaccount.com'
+
+      - name: Set up K8S config
+        run: |-
+          gcloud container clusters get-credentials alex-cloud-1 --region us-central1
+
+      - name: Helm login
+        run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
+
+      - name: Packagge helm library
+        run: helm package helm-library
+
+      - name: Get current version
+        run: echo "CURRENT_VERSION=$(grep 'version:' helm-library/Chart.yaml | sed 's/.*\ //g')"
+
+      - name: Push helm library
+        run: |-
+          export HELM_EXPERIMENTAL_OCI=1
+          helm push helm-library-${{ env.CURRENT_VERSION }}.tgz oci://us-central1-docker.pkg.dev/alex-cloud-438416/helm-library
+
+      - name: Show pushed version
+        run: echo ${{ env.CURRENT_VERSION }}
