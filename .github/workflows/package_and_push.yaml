@@ -45,9 +45,7 @@ jobs:
         run: echo "CURRENT_VERSION=$(grep 'version:' helm-library/Chart.yaml | sed 's/.*\ //g')" >> $GITHUB_ENV
 
       - name: Push helm library
-        run: |-
-          export HELM_EXPERIMENTAL_OCI=1
-          helm push helm-library-${{ env.CURRENT_VERSION }}.tgz oci://us-central1-docker.pkg.dev/alex-cloud-438416/helm-library --debug
+        run: export HELM_EXPERIMENTAL_OCI=1 && helm push helm-library-${{ env.CURRENT_VERSION }}.tgz oci://us-central1-docker.pkg.dev/alex-cloud-438416/helm-library
 
       - name: Show pushed version
         run: echo ${{ env.CURRENT_VERSION }}
