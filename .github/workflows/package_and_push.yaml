@@ -36,7 +36,7 @@ jobs:
         run: helm package helm-library
 
       - name: Get current version
-        run: echo "CURRENT_VERSION=$(grep 'version:' helm-library/Chart.yaml | sed 's/.*\ //g')"
+        run: echo "CURRENT_VERSION=$(grep 'version:' helm-library/Chart.yaml | sed 's/.*\ //g')" >> $GITHUB_ENV
 
       - name: Push helm library
         run: |-
