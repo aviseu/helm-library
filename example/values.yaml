@@ -1,10 +1,17 @@
 namespace: example
 
-service:
-  name: example
-  selector: example
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: 80
+services:
+  example1:
+    name: example1
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+        targetPort: 80
+  example2:
+    name: example2
+    ports:
+      - name: http
+        port: 8080
+        protocol: TCP
+        targetPort: 8080

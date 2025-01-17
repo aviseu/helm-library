@@ -1,10 +1,12 @@
 namespace: example-override
 
-service:
-  name: example-override
-  selector: example-override
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: 80
+services:
+  example1:
+    name: example1-override
+  example2:
+    name: example2-overrride
+    ports:
+      - name: http
+        port: 8081
+        protocol: TCP
+        targetPort: 8081

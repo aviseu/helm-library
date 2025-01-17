@@ -1,3 +1,0 @@
-{{- template "helm-library.service.tpl" . -}}
-{{- define "example.service.tpl" -}}
-{{- end -}}
