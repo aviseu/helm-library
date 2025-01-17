@@ -26,12 +26,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Build
-        run: helm dependency build example/
-
-      - name: Test
-        run: helm install example example/ -f example/values.yaml -f example/values.override.yaml --dry-run --debug
-
       - id: auth
         name: Authenticate
         uses: google-github-actions/auth@v2
@@ -43,6 +37,12 @@ jobs:
       - name: Set up K8S config
         run: |-
           gcloud container clusters get-credentials ${{ env.CLUSTER }} --zone ${{ env.ZONE }}
+
+      - name: Build
+        run: helm dependency build example/
+
+      - name: Test
+        run: helm install example example/ -f example/values.yaml -f example/values.override.yaml --dry-run --debug
 
       - name: Helm login
         run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://${{ env.REGION }}-docker.pkg.dev
