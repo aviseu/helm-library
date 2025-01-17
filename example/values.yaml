@@ -46,7 +46,9 @@ deployments:
     replicas: 1
     containers:
       - name: container2
-        image: example2:latest
+        image:
+          repository: example2-repository.com
+          tag: latest
         env:
           - name: EXAMPLE2_ENV
             value: example2
