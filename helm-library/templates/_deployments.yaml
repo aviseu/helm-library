@@ -1,0 +1,38 @@
+{{- define "helm-library.deployments.tpl" -}}
+{{- $namespace := .Values.namespace -}}
+{{- $serviceAccountName := .Values.serviceAccount.name -}}
+{{ range $deployment := .Values.deployments }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $deployment.name }}
+  namespace: {{ $namespace }}
+spec:
+  replicas: {{ $deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $deployment.name }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ $deployment.name }}
+    spec:
+      serviceAccountName: {{ $serviceAccountName }}
+      containers:
+        {{ range $container := $deployment.containers }}
+        - name: {{ $container.name }}
+          image: {{ $container.image }}
+          env:
+            {{ toYaml $container.env | nindent 12 }}
+          ports:
+            {{ toYaml $container.ports | nindent 12 }}
+          resources:
+            {{ toYaml $container.resources | nindent 12 }}
+        {{- end -}}
+{{- end -}}
+{{- end -}}

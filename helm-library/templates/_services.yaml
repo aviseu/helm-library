@@ -1,17 +1,17 @@
 {{- define "helm-library.services.tpl" -}}
 {{- $namespace := .Values.namespace -}}
-{{ range $key, $value := .Values.services }}
+{{ range $service := .Values.services }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ $value.name }}
+  name: {{ $service.name }}
   namespace: {{ $namespace }}
 spec:
   type: ClusterIP
   ports:
-    {{ toYaml $value.ports | nindent 4 }}
+    {{ toYaml $service.ports | nindent 4 }}
   selector:
-    app: {{ $value.name }}
+    app: {{ $service.name }}
 {{- end -}}
 {{- end -}}

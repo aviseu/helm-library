@@ -1,5 +1,9 @@
 namespace: example
 
+serviceAccount:
+  create: true
+  name: example
+
 services:
   example1:
     name: example1
@@ -15,3 +19,43 @@ services:
         port: 8080
         protocol: TCP
         targetPort: 8080
+
+deployments:
+  deploy1:
+    name: Deployment 1
+    replicas: 1
+    containers:
+      - name: container1
+        image: example1:latest
+        env:
+          - name: EXAMPLE1_ENV
+            value: example1
+        ports:
+          - name: http
+            containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+  deploy2:
+    name: Deployment 2
+    replicas: 1
+    containers:
+      - name: container2
+        image: example2:latest
+        env:
+          - name: EXAMPLE2_ENV
+            value: example2
+        ports:
+          - name: http
+            containerPort: 8080
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi

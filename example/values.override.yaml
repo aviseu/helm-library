@@ -1,5 +1,8 @@
 namespace: example-override
 
+serviceAccount:
+  name: example-override
+
 services:
   example1:
     name: example1-override
