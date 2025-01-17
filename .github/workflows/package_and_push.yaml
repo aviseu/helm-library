@@ -40,8 +40,7 @@ jobs:
 
       - name: Install gke-gcloud-auth-plugin
         run: |-
-          export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-          gcloud components install gke-gcloud-auth-plugin
+          sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
 
       - name: Helm login
         run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://${{ env.REGION }}-docker.pkg.dev
