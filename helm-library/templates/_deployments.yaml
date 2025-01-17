@@ -26,7 +26,8 @@ spec:
       containers:
         {{ range $container := $deployment.containers }}
         - name: {{ $container.name }}
-          image: {{ $container.image }}
+          image:
+            {{ toYaml $container.image | nindent 12 }}
           env:
             {{ toYaml $container.env | nindent 12 }}
           ports:
