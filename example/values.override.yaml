@@ -2,6 +2,7 @@ namespace: example-override
 
 service:
   name: example-override
+  selector: app=example-override
   ports:
     - name: http
       port: 80
