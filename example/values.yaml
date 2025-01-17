@@ -1,0 +1,9 @@
+namespace: example
+
+service:
+  name: example
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80

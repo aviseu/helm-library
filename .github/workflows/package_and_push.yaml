@@ -26,11 +26,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-#      - name: Build
-#        run: helm dependency build example/
+      - name: Build
+        run: helm dependency build example/
 
-#      - name: Test
-#        run: helm install example example/ -f example/values.yaml -f example/values.override.yaml -f example/secrets.override.yaml --dry-run --debug
+      - name: Test
+        run: helm install example example/ -f example/values.yaml -f example/values.override.yaml --dry-run --debug
 
       - id: auth
         name: Authenticate
