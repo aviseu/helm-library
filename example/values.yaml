@@ -1,7 +1,6 @@
 namespace: example
 
 serviceAccount:
-  create: true
   name: example
 
 services:
