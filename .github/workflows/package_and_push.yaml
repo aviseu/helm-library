@@ -5,6 +5,14 @@ on:
     branches:
       - main
 
+env:
+  PROJECT_ID: alex-cloud-438416
+  WORKLOAD_IDENTITY_PROVIDER: projects/38127965315/locations/global/workloadIdentityPools/github-actions/providers/github
+  SERVICE_ACCOUNT: github-agent@alex-cloud-438416.iam.gserviceaccount.com
+  CLUSTER: alex-cloud-1
+  REGION: us-central1
+  ZONE: us-central1-c
+
 jobs:
   package_and_push:
     name: Package and Push
@@ -27,16 +35,16 @@ jobs:
         name: Authenticate
         uses: google-github-actions/auth@v2
         with:
-          project_id: 'alex-cloud-438416'
-          workload_identity_provider: 'projects/38127965315/locations/global/workloadIdentityPools/github-actions/providers/github'
-          service_account: 'github-agent@alex-cloud-438416.iam.gserviceaccount.com'
+          project_id: ${{ env.PROJECT_ID }}
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
 
       - name: Set up K8S config
         run: |-
-          gcloud container clusters get-credentials alex-cloud-1 --region us-central1-c
+          gcloud container clusters get-credentials ${{ env.CLUSTER }} --region ${{ env.REGION }}
 
       - name: Helm login
-        run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
+        run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://${{ env.REGION }}-docker.pkg.dev
 
       - name: Package helm library
         run: helm package helm-library
@@ -45,7 +53,7 @@ jobs:
         run: echo "CURRENT_VERSION=$(grep 'version:' helm-library/Chart.yaml | sed 's/.*\ //g')" >> $GITHUB_ENV
 
       - name: Push helm library
-        run: export HELM_EXPERIMENTAL_OCI=1 && helm push helm-library-${{ env.CURRENT_VERSION }}.tgz oci://us-central1-docker.pkg.dev/alex-cloud-438416/helm-library
+        run: export HELM_EXPERIMENTAL_OCI=1 && helm push helm-library-${{ env.CURRENT_VERSION }}.tgz oci://${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/helm-library
 
       - name: Show pushed version
         run: echo ${{ env.CURRENT_VERSION }}
