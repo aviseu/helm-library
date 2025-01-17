@@ -2,7 +2,7 @@ namespace: example
 
 service:
   name: example
-  selector: app=example
+  selector: example
   ports:
     - name: http
       port: 80
