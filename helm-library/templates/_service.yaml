@@ -8,7 +8,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  {{ toYaml .Values.service.ports | nindent 2 }}
+    {{ toYaml .Values.service.ports | nindent 4 }}
   selector:
     app: {{ .Values.service.selector }}
 {{- end -}}
