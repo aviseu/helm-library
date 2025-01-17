@@ -1,0 +1,3 @@
+{{- template "helm-library.ingresses.tpl" . -}}
+{{- define "example.ingresses.tpl" -}}
+{{- end -}}

@@ -3,6 +3,21 @@ namespace: example
 serviceAccount:
   name: example
 
+ingresses:
+  example-ingress:
+    name: example-ingress
+    hosts:
+      - host: example.com
+        http:
+          paths:
+          - path: /bar
+            pathType: Prefix
+            backend:
+              service:
+                name: service2
+                port:
+                  number: 8080
+
 services:
   example1:
     name: example1
