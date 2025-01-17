@@ -5,6 +5,7 @@ serviceAccount:
 
 ingresses:
   example-ingress:
+    ip: 1.1.1.1
     name: example-ingress
     hosts:
       - host: example.com
