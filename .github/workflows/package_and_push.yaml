@@ -38,14 +38,14 @@ jobs:
         run: |-
           gcloud container clusters get-credentials ${{ env.CLUSTER }} --zone ${{ env.ZONE }}
 
+      - name: Helm login
+        run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://${{ env.REGION }}-docker.pkg.dev
+
       - name: Build
         run: helm dependency build example/
 
       - name: Test
         run: helm install example example/ -f example/values.yaml -f example/values.override.yaml --dry-run --debug
-
-      - name: Helm login
-        run: export HELM_EXPERIMENTAL_OCI=1 && gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin https://${{ env.REGION }}-docker.pkg.dev
 
       - name: Package helm library
         run: helm package helm-library
