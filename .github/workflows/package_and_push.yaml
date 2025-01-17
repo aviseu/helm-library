@@ -1,4 +1,4 @@
-name: Package Helm Library Chart and Push to GCP's Artifact Repository
+name: Package and push
 
 on:
   workflow_dispatch:
