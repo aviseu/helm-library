@@ -2,6 +2,7 @@
 {{- $namespace := .Values.namespace -}}
 {{- $serviceAccountName := .Values.serviceAccount.name -}}
 {{ range $deployment := .Values.deployments }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -1,6 +1,7 @@
 {{- define "helm-library.ingresses.tpl" -}}
 {{ $namespace := .Values.namespace }}
 {{ range $ingress := .Values.ingresses }}
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
