@@ -30,6 +30,7 @@ services:
         targetPort: 80
   example2:
     name: example2
+    type: NodePort
     ports:
       - name: http
         port: 8080

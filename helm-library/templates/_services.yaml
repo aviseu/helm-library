@@ -8,7 +8,7 @@ metadata:
   name: {{ $service.name }}
   namespace: {{ $namespace }}
 spec:
-  type: ClusterIP
+  type: {{ $service.type | default "ClusterIP" }}
   ports:
     {{ toYaml $service.ports | nindent 4 }}
   selector:
