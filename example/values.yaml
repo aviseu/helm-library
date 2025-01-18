@@ -6,7 +6,9 @@ serviceAccount:
 ingresses:
   example-ingress:
     ip: 1.1.1.1
-    tls: "secret-name"
+    tls:
+      secret: "secret-name"
+      host: example.com
     name: example-ingress
     rules:
       - host: example.com

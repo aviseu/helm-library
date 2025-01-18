@@ -8,10 +8,14 @@ metadata:
   namespace: {{ $namespace }}
   annotations:
     kubernetes.io/ingress.global-static-ip-name: {{ $ingress.ip }}
+    external-dns.alpha.kubernetes.io/hostname: example.com
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   {{- if $ingress.tls }}
   tls:
-    - secretName: {{ $ingress.tls }}
+    - secretName: {{ $ingress.tls.secret }}
+      hosts:
+        - {{ $ingress.tls.host }}
   {{- end }}
   rules:
     {{ toYaml $ingress.rules | nindent 4 }}
