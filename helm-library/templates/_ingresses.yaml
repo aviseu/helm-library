@@ -9,6 +9,10 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: {{ $ingress.ip }}
 spec:
+  {{- if $ingress.tls }}
+  tls:
+    - secretName: {{ $ingress.tls }}
+  {{- end }}
   rules:
     {{ toYaml $ingress.rules | nindent 4 }}
 {{- end -}}
