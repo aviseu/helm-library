@@ -32,6 +32,14 @@ spec:
             {{ toYaml $container.env | nindent 12 }}
           ports:
             {{ toYaml $container.ports | nindent 12 }}
+          {{- if $container.readinessProbe }}
+          readinessProbe:
+            {{ toYaml $container.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- if $container.livenessProbe }}
+          livenessProbe:
+            {{ toYaml $container.livenessProbe | nindent 12 }}
+          {{- end }}
           resources:
             {{ toYaml $container.resources | nindent 12 }}
         {{- end -}}

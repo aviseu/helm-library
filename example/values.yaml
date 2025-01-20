@@ -53,6 +53,16 @@ deployments:
         ports:
           - name: http
             containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 9090
+            scheme: HTTP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 9090
+            scheme: HTTP
         resources:
           limits:
             cpu: 100m
