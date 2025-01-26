@@ -16,5 +16,5 @@ spec:
           from: Selector
           selector:
             matchLabels:
-              {{ print "shared-gateway-" (.Values.gateway.name | toString) }}: "true"
+              "{{ print "shared-gateway-" (.Values.gateway.name | toString) }}": "true"
 {{- end -}}
