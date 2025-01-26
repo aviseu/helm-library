@@ -2,4 +2,4 @@ apiVersion: v2
 name: helm-library
 description: A Helm library chart for kubernetes
 type: library
-version: 0.5.6
+version: 0.5.7

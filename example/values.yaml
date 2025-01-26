@@ -9,6 +9,7 @@ serviceAccount:
 gateway:
   name: example-gateway
   namespace: infra
+  address: public-ip
 
 httpRoutes:
   - name: example-route
