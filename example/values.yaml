@@ -3,22 +3,24 @@ namespace: example
 serviceAccount:
   name: example
 
-ingresses:
-  example-ingress:
-    ip: 1.1.1.1
-    tls: secret-name
-    name: example-ingress
+gateway:
+  name: example-gateway
+  namespace: infra
+
+httpRoutes:
+  - name: example-route
+    gateway:
+      name: example-gateway
+      namespace: infra
     rules:
-      - host: example.com
-        http:
-          paths:
-          - path: /bar
-            pathType: Prefix
-            backend:
-              service:
-                name: service2
-                port:
-                  number: 8080
+      - matches:
+          - path:
+            type: PathPrefix
+            value: /hr
+        backendRefs:
+          - kind: Service
+            name: echo-hr
+            port: 9080
 
 services:
   example1:
