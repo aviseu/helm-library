@@ -15,9 +15,11 @@ httpRoutes:
     gateway:
       name: example-gateway
       namespace: infra
+    hostnames:
+      - example.com
     rules:
       - matches:
-          - path:
+        - path:
             type: PathPrefix
             value: /hr
         backendRefs:

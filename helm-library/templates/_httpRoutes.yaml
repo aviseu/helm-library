@@ -13,6 +13,8 @@ spec:
   parentRefs:
     - name: {{ $httpRoute.gateway.name }}
       namespace: {{ $httpRoute.gateway.namespace }}
+  hostnames:
+    {{ toYaml $httpRoute.hostnames | nindent 4 }}
   rules:
     {{ toYaml $httpRoute.rules | nindent 4 }}
 {{- end -}}
