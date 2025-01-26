@@ -18,7 +18,7 @@ spec:
         namespaces:
           from: Same
     {{ range $host := .Values.gateway.hosts }}
-    - name: https
+    - name: {{ $host.hostname }}-https
       hostname: {{ $host.hostname }}
       protocol: HTTPS
       port: 443
