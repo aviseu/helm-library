@@ -17,7 +17,7 @@ spec:
       allowedRoutes:
         namespaces:
           from: Same
-    {{ range $host := .Values.gateway.hosts }}
+    {{- range $host := .Values.gateway.hosts }}
     - name: {{ $host.name }}
       hostname: {{ $host.hostname }}
       protocol: HTTPS
@@ -33,7 +33,7 @@ spec:
         certificateRefs:
           - name: {{ $host.tls }}
             kind: Secret
-    {{- end -}}
+    {{- end }}
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
