@@ -11,9 +11,11 @@ gateway:
   namespace: infra
   address: public-ip
   hosts:
-    - hostname: example.com
+    - name: example-com-https
+      hostname: example.com
       tls: cloudflare-origin-ssl
-    - hostname: sub.example.com
+    - name: sub-example-com-https
+      hostname: sub.example.com
       tls: cloudflare-origin-ssl
 
 httpRoutes:
