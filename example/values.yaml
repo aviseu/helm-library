@@ -1,7 +1,7 @@
 namespace:
   name: example
   labels:
-    shared-gateway-example-gateway: "true"
+    sharedGateway: "true"
 
 serviceAccount:
   name: example
