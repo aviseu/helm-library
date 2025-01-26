@@ -9,7 +9,7 @@ spec:
   addresses:
     - type: NamedAddress
       value: {{ .Values.gateway.address }}
-  gatewayClassName: gke-l7-gxlb
+  gatewayClassName: gke-l7-global-external-managed
   listeners:
     - name: http
       protocol: HTTP
