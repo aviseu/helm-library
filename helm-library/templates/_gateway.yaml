@@ -17,8 +17,9 @@ spec:
       allowedRoutes:
         namespaces:
           from: Same
+    {{ range $host := .Values.gateway.hosts }}
     - name: https
-      hostname: {{ .Values.gateway.hostname }}
+      hostname: {{ $host.hostname }}
       protocol: HTTPS
       port: 443
       allowedRoutes:
@@ -30,8 +31,9 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: {{ .Values.gateway.tls }}
+          - name: {{ $host.tls }}
             kind: Secret
+    {{- end -}}
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
