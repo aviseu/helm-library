@@ -32,7 +32,6 @@ spec:
         certificateRefs:
           - name: {{ .Values.gateway.tls }}
             kind: Secret
-            group: core
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
