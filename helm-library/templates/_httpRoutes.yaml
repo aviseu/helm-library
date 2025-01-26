@@ -1,5 +1,5 @@
 {{- define "helm-library.httpRoutes.tpl" -}}
-{{- $namespace := .Values.namespace -}}
+{{- $namespace := .Values.namespace.name -}}
 {{ range $httpRoute := .Values.httpRoutes }}
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1

@@ -1,13 +1,8 @@
-namespace: example-override
+namespace:
+  name: example-override
 
 serviceAccount:
   name: example-override
-
-ingresses:
-  example-ingress:
-    name: example-ingress
-    hosts:
-      - host: override.example.com
 
 services:
   example1:

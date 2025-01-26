@@ -1,0 +1,11 @@
+{{- define "helm-library.namespace.tpl" -}}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.namespace.name }}
+  {{- if .Values.namespace.labels }}
+  labels:
+    {{ toYaml .Values.namespace.labels | nindent 4 }}
+  {{- end }}
+{{- end -}}

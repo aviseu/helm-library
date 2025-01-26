@@ -1,5 +1,5 @@
 {{- define "helm-library.deployments.tpl" -}}
-{{- $namespace := .Values.namespace -}}
+{{- $namespace := .Values.namespace.name -}}
 {{- $serviceAccountName := .Values.serviceAccount.name -}}
 {{ range $deployment := .Values.deployments }}
 ---

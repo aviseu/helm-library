@@ -1,4 +1,7 @@
-namespace: example
+namespace:
+  name: example
+  labels:
+    shared-gateway-example-gateway: "true"
 
 serviceAccount:
   name: example

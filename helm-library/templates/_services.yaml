@@ -1,5 +1,5 @@
 {{- define "helm-library.services.tpl" -}}
-{{- $namespace := .Values.namespace -}}
+{{- $namespace := .Values.namespace.name -}}
 {{ range $service := .Values.services }}
 ---
 apiVersion: v1
