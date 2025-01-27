@@ -3,6 +3,9 @@ namespace:
   labels:
     sharedGateway: "true"
 
+configMap:
+  GLOBAL_ENV: "true"
+
 serviceAccount:
   name: example
 
@@ -65,6 +68,11 @@ deployments:
         env:
           - name: EXAMPLE1_ENV
             value: example1
+        envFrom:
+          - configMapRef:
+              name: example
+          - secretRef:
+              name: example
         ports:
           - name: http
             containerPort: 80

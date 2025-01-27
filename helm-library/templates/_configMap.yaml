@@ -1,0 +1,10 @@
+{{- define "helm-library.configMap.tpl" -}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace.name }}
+data:
+  {{ toYaml .Values.configMap | nindent 2 }}
+{{- end -}}

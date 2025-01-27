@@ -1,0 +1,4 @@
+creation_rules:
+  - path_regex: .*/secrets.override.yaml$
+    encrypted_regex: .*
+    gcp_kms: projects/alex-cloud-438416/locations/us-central1/keyRings/sops/cryptoKeys/sops-key
