@@ -1,4 +1,5 @@
 helm:
+	sh -c "rm -rf example/Chart.lock example/charts"
 	helm dependency build example/
 	helm secrets upgrade --install example example/ -f example/values.yaml -f example/values.override.yaml -f example/secrets.override.yaml --dry-run --debug
 
